@@ -1,9 +1,9 @@
 FROM ubuntu:22.04
 
 RUN apt-get update && \
-    apt-get install -y -qq --force-yes python3-pip ffmpeg
+    apt-get install -y python3-pip ffmpeg
 
-RUN apt-get install -y -qq --force-yes cron
+RUN apt-get install -y cron
 
 RUN python3 -m pip install yt-dlp
 
