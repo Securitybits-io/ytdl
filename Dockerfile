@@ -7,7 +7,7 @@ RUN apt-get install -y cron
 
 RUN python3 -m pip install yt-dlp
 
-RUN mkdir /media
+RUN mkdir /ytdl
 
 COPY ytdl-cron /etc/cron.d/ytdl-cron
 RUN chmod 0644 /etc/cron.d/ytdl-cron
