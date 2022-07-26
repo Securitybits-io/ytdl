@@ -1,0 +1,2 @@
+# Cron Job to run shellscript every 3rd hour
+0 */3 * * * /usr/bin/sh /opt/ytdl.sh > /proc/1/fd/1 2>/proc/1/fd/2
