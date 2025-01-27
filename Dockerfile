@@ -2,6 +2,7 @@
 FROM alpine:latest
 
 RUN apt-get update -qq && \
+    apt-get install py3-pip && \
     apt-get install -y python3-pip ffmpeg
 
 RUN apt-get install -y cron
