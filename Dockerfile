@@ -1,8 +1,6 @@
-#FROM ubuntu:22.04
-FROM alpine:latest
+FROM ubuntu:22.04
 
 RUN apt-get update -qq && \
-    apt-get install py3-pip && \
     apt-get install -y python3-pip ffmpeg
 
 RUN apt-get install -y cron
