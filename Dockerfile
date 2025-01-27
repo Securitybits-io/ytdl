@@ -1,4 +1,5 @@
-FROM ubuntu:alpine
+#FROM ubuntu:22.04
+FROM alpine:latest
 
 RUN apt-get update -qq && \
     apt-get install -y python3-pip ffmpeg
