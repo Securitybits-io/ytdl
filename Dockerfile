@@ -1,21 +1,35 @@
-FROM ubuntu:22.04
+FROM alpine
 
-RUN apt-get update -qq && \
-    apt-get install -y python3-pip ffmpeg
+ARG DUMB_INIT_VERSION=1.2.5
 
-RUN apt-get install -y cron
+ARG BUILD_VERSION
+#ARG ARCHIVE_URL=https://github.com/yt-dlp/yt-dlp/archive/
 
-RUN python3 -m pip install yt-dlp
+RUN set -x \
+ && apk update \
+ && apk upgrade -a \
+ && apk add --no-cache \
+        ca-certificates \
+        curl \
+        dumb-init \
+        ffmpeg \
+        python3 \
+        py3-mutagen \
+    # Install youtube-dl
+ && curl -Lo /usr/local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/yt-dlp \
+ #&& curl -Lo SHA2-256SUMS https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/SHA2-256SUMS \
+ #&& cat SHA2-256SUMS | grep yt-dlp: | awk -F: '{print $2" "$1}' | sha256sum -c \
+ && chmod a+rx /usr/local/bin/yt-dlp \
+    # Clean-up
+ #&& rm SHA2-256SUMS \
+ && apk del curl \
 
-RUN rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /ytdl
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
-COPY ytdl-cron /etc/cron.d/ytdl-cron
-RUN chmod 0644 /etc/cron.d/ytdl-cron
-RUN crontab /etc/cron.d/ytdl-cron
 
-COPY ytdl.sh /opt/ytdl.sh
-RUN chmod 0744 /opt/ytdl.sh
+# Basic check.
+RUN dumb-init yt-dlp --version
 
-CMD ["cron", "-f"]
+ENTRYPOINT ["dumb-init", "yt-dlp"]
+CMD ["--help"]

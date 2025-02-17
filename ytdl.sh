@@ -1,2 +1,0 @@
-#!/bin/bash
-/usr/local/bin/yt-dlp -N 5 --playlist-reverse --download-archive /ytdl/downloaded.txt -i -o "/ytdl/%(uploader)s/%(playlist)s/%(upload_date>%Y)s/%(playlist)s - S%(upload_date>%Y)sE%(playlist_index)s - %(title)s.%(ext)s" -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]" -S vcodec:h264 --merge-output-format mkv --add-metadata --write-thumbnail --write-description --write-auto-subs --sub-langs en,sv,-live_chat --convert-subs srt --batch-file=/config/channels.txt --compat-options playlist-index
