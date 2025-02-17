@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.21.2
 
 ARG DUMB_INIT_VERSION=1.2.5
 
