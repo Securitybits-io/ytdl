@@ -28,7 +28,7 @@ ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 
 # Basic check.
-RUN dumb-init yt-dlp --version
+#RUN dumb-init yt-dlp --version
 
 ENTRYPOINT ["dumb-init", "yt-dlp"]
 CMD ["--help"]
