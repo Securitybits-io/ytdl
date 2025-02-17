@@ -22,8 +22,7 @@ RUN set -x \
  && chmod a+rx /usr/local/bin/yt-dlp \
     # Clean-up
  #&& rm SHA2-256SUMS \
- && apk del curl \
-
+ && apk del curl 
 
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
